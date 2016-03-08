@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import portfolioApp from './reducers';
-import app from './components/app';
+import app from './containers/app';
 
 const store = createStore(
   portfolioApp,

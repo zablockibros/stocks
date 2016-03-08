@@ -56,7 +56,7 @@ export function getStock(symbol) {
         }
         else {
           dispatch(recieveStock(symbol, json))
-          //dispatch(initStock(symbol, json))
+          dispatch(initStock(symbol, json))
         }
       })
   }
