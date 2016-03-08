@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
+// Lazy array to update all of the stocks and their stats
+let updateIntervals = {};
+
 export const REQUEST_STOCK = 'REQUEST_STOCK'
 export function requestStock(symbol) {
   return {
@@ -65,6 +68,9 @@ export function getStock(symbol) {
 export const INIT_STOCK = 'INIT_STOCK'
 
 function initStock(symbol, json) {
+  if(!updateIntervals[symbol]){
+    updateIntervals[symbol] = setInterval(() => dispatch(getStock(symbol)), 2500)
+  }
   return {
     type: INIT_STOCK,
     symbol,
@@ -83,6 +89,7 @@ export function buyStock(symbol, amt) {
   }
 }
 
+
 export const SELL_STOCK = 'SELL_STOCK'
 
 export function sellStock(symbol, amt) {
@@ -90,5 +97,23 @@ export function sellStock(symbol, amt) {
     type: SELL_STOCK,
     symbol,
     amt
+  }
+}
+
+export const SELL_STOCK_FAIL = 'SELL_STOCK_FAIL'
+
+export function sellStockFail(symbol, amt) {
+  return {
+    type: SELL_STOCK_FAIL,
+    message : `You don't have ${amt} shares of ${symbol}`
+  }
+}
+
+export const BUY_STOCK_FAIL = 'BUY_STOCK_FAIL'
+
+export function buyStockFail(symbol, amt) {
+  return {
+    type: BUY_STOCK_FAIL,
+    message : `You don't have enought money to buy ${amt} shares of ${symbol}`
   }
 }

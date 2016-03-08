@@ -7,6 +7,6 @@ const App = () => (
     <Header />
     <Boxes />
   </div>
-)
+);
 
 export default App
