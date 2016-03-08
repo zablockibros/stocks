@@ -2,18 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import getStock from '../actions'
 import LatestError from './LatestError.js'
+import BuyStock from './BuyStock'
+import SellStock from './SellStock'
 import Table from 'material-ui/lib/table/table';
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 import TableRow from 'material-ui/lib/table/table-row';
 import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
-
-/*<TableRow>
- <TableRowColumn></TableRowColumn>
- <TableRowColumn><BuyStock /></TableRowColumn>
- <TableRowColumn><SellStock /></TableRowColumn>
- </TableRow>*/
 
 class StockInfo extends Component {
 
@@ -40,7 +36,11 @@ class StockInfo extends Component {
               <TableRowColumn>stock.bid</TableRowColumn>
             </TableRow>
           )}
-
+          <TableRow>
+           <TableRowColumn></TableRowColumn>
+           <TableRowColumn><BuyStock /></TableRowColumn>
+           <TableRowColumn><SellStock /></TableRowColumn>
+           </TableRow>
         </TableBody>
       </Table>
       )
