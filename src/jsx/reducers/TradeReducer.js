@@ -10,8 +10,16 @@ const stock = (state = {}, action) => {
           active : 1
         }
       }
-      else{
-        return Object.assign({}, state, {active : 0});
+      else {
+        return Object.assign({}, state, {active: 0});
+      }
+    case 'UPDATE_STOCK':
+      return {
+        symbol : action.symbol,
+        bid : action.bid,
+        ask: action.ask,
+        amt: state.amt,
+        active: state.active
       }
     case 'BUY_STOCK':
       if(action.symbol == state.symbol) {
@@ -19,7 +27,8 @@ const stock = (state = {}, action) => {
           symbol: action.symbol,
           bid: action.bid,
           ask: action.ask,
-          amt: action.amt + state.amt
+          amt: action.amt + state.amt,
+          active: state.active
         }
       }
     case 'SELL_STOCK':
@@ -28,7 +37,8 @@ const stock = (state = {}, action) => {
           symbol: action.symbol,
           bid: action.bid,
           ask: action.ask,
-          amt: state.amt - action.amt
+          amt: state.amt - action.amt,
+          active: state.active
         }
       }
   }
@@ -38,6 +48,25 @@ const TradeReducers = (state = {money : 100000, stocks : []}, action) => {
   let stockIndex = state.stocks.reduce(t => (previousValue, currentValue, currentIndex, array) => { if(array[currentIndex].symbol == action.symbol) return currentIndex + 1; else return 0; }, 0) - 1;
   switch (action.type) {
     case 'INIT_STOCK':
+      if(stockIndex > -1){
+        // Already exists in state
+        return {
+          money : state.money,
+          stocks : [
+            state.stocks.map(t => stock(t, action))
+          ]
+        }
+      }
+      else{
+        return {
+          money : state.money,
+          stocks : [
+            ...state.stocks,
+            stock({symbol : action.symbol}, action)
+          ]
+        }
+      }
+    case 'UPDATE_STOCK':
       if(stockIndex > -1){
         // Already exists in state
         return {

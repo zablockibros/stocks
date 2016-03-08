@@ -39,27 +39,30 @@ export function badSymbol(message) {
   }
 }
 
-export function getStock(symbol) {
-
+export function getStock(symbol, update = false) {
   return function (dispatch) {
 
     dispatch(requestStock(symbol))
 
     return fetch(`http://careers-data.benzinga.com/rest/richquote?symbols=${symbol}`)
       .then(function(response){
-        if (response.status >= 400) {
+        if (response.status >= 400 && !update) {
           dispatch(invalidSymbol(symbol));
           throw new Error("Bad response");
         }
         return response.json()
       })
       .then(json => {
-        if(json[symbol].error){
+        if(json[symbol].error  && !update){
           dispatch(badSymbol(json[symbol].error.message))
         }
-        else {
+        else if(!update) {
           dispatch(recieveStock(symbol, json))
           dispatch(initStock(symbol, json))
+        }
+        else{
+          // Purely to constantly update prices for you
+          dispatch(updateStock(symbol, json))
         }
       })
   }
@@ -69,10 +72,24 @@ export const INIT_STOCK = 'INIT_STOCK'
 
 function initStock(symbol, json) {
   if(!updateIntervals[symbol]){
-    updateIntervals[symbol] = setInterval(() => dispatch(getStock(symbol)), 2500)
+    dispatch(getStock(symbol, true));
   }
   return {
     type: INIT_STOCK,
+    symbol,
+    bid: json.data[symbol].bidPrice,
+    ask: json.data[symbol].askPrice
+  }
+}
+
+export const UPDATE_STOCK = 'UPDATE_STOCK'
+
+function updateStock(symbol, json) {
+    if(!updateIntervals[symbol]){
+      updateIntervals[symbol] = setInterval(() => dispatch(getStock(symbol, true)), 2500)
+   }
+  return {
+    type: UPDATE_STOCK,
     symbol,
     bid: json.data[symbol].bidPrice,
     ask: json.data[symbol].askPrice
