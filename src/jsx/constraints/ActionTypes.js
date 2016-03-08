@@ -1,0 +1,7 @@
+export const REQUEST_STOCK = 'REQUEST_STOCK'
+export const RECIEVE_STOCK = 'RECIEVE_STOCK'
+export const INVALID_SYMBOL = 'INVALID_SYMBOL'
+export const BAD_SYMBOL = 'BAD_SYMBOL'
+export const INIT_STOCK = 'INIT_STOCK'
+export const BUY_STOCK = 'BUY_STOCK'
+export const SELL_STOCK = 'SELL_STOCK'

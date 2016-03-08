@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 export const REQUEST_STOCK = 'REQUEST_STOCK'
-function requestStock(symbol) {
+export function requestStock(symbol) {
   return {
     type: 'REQUEST_STOCK',
     symbol
@@ -9,7 +9,7 @@ function requestStock(symbol) {
 }
 
 export const RECEIVE_STOCK = 'RECIEVE_STOCK'
-function receiveStock(symbol, json) {
+export function receiveStock(symbol, json) {
   return {
     type: RECEIVE_STOCK,
     symbol,
