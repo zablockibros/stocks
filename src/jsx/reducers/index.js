@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import SearchReducer from './SearchReducer'
-//import StockReducer from './StockReducer'
+import TradeReducer from './TradeReducer'
 
 const rootReducer = combineReducers({
-  SearchReducer
+  SearchReducer,
+  TradeReducer
 })
 
 export default rootReducer
