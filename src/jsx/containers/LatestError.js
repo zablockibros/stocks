@@ -18,7 +18,7 @@ class LatestError extends Component {
 
 function mapStateToProps(state) {
   return {
-
+    message: PropTypes.string.isRequired
   }
 }
 

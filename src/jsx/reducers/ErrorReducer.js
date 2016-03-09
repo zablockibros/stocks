@@ -8,6 +8,26 @@ const ErrorReducers = (state = { message : null }, action) => {
       return {
         message: action.message
       }
+    case 'INVALID_SYMBOL':
+      return {
+        message: `Failed to return ${action.symbol}, try again`
+      }
+    case 'BAD_SYMBOL':
+      return {
+        message: action.message
+      }
+    case 'INIT_STOCK':
+        return {
+          message : null
+        }
+    case 'BUY_STOCK':
+      return {
+        message : null
+      }
+    case 'SELL_STOCK':
+      return {
+        message : null
+      }
     default:
       return state
   }
