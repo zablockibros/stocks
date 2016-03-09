@@ -6,29 +6,36 @@ import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
 
+
+let style = {fontFamily: 'Times New Roman',
+  fontSize: "24px",
+  color: "rgba(0, 0, 0, 0.4)"}
 const TradeList = ({ stocks, onSelectStock }) => (
-  <Table>
-    <TableHeader>
-      <TableRow>
-        <TableHeaderColumn>Symbol</TableHeaderColumn>
-        <TableHeaderColumn>Amt.</TableHeaderColumn>
-        <TableHeaderColumn>Bid</TableHeaderColumn>
-        <TableHeaderColumn>Ask</TableHeaderColumn>
-        <TableHeaderColumn></TableHeaderColumn>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {stocks.map(stock =>
-        <TableRow onClick={onSelectStock(stock.symbol)}>
-          <TableRowColumn>{stock.symbol}</TableRowColumn>
-          <TableRowColumn>{stock.amt}</TableRowColumn>
-          <TableRowColumn>{stock.bid}</TableRowColumn>
-          <TableRowColumn>{stock.ask}</TableRowColumn>
-          <TableRowColumn>Select</TableRowColumn>
+  <div>
+    <span style={style}>Your trading:</span>
+    <Table selectable={false}>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderColumn>Symbol</TableHeaderColumn>
+          <TableHeaderColumn>Amt.</TableHeaderColumn>
+          <TableHeaderColumn>Bid</TableHeaderColumn>
+          <TableHeaderColumn>Ask</TableHeaderColumn>
+          <TableHeaderColumn></TableHeaderColumn>
         </TableRow>
-      )}
-    </TableBody>
-  </Table>
+      </TableHeader>
+      <TableBody>
+        {stocks.map(stock =>
+          <TableRow onClick={onSelectStock(stock.symbol)}>
+            <TableRowColumn>{stock.symbol}</TableRowColumn>
+            <TableRowColumn>{stock.amt}</TableRowColumn>
+            <TableRowColumn>{stock.bid}</TableRowColumn>
+            <TableRowColumn>{stock.ask}</TableRowColumn>
+            <TableRowColumn>Select</TableRowColumn>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  </div>
 )
 
 TradeList.propTypes = {

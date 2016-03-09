@@ -1,25 +1,45 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { getStock } from '../actions'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 let input;
+const style = {
+  marginLeft: 12,
+  display: "inline-block",
+};
+class SearchStock extends Component {
 
-let  SearchStock = ({dispatch}) => (
-        <form onSubmit={e => {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      value: '',
+    }
+  }
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    })
+  }
+
+  render(){
+    const {dispatch} = this.props;
+    return(
+      <form onSubmit={e => {
         e.preventDefault();
-        if (!input.value.trim()) {
+        if (!this.state.value.trim()) {
           return
         }
-        dispatch(getStock(input.value))
+        dispatch(getStock(this.state.value.toUpperCase()))
       }}>
-          <input ref={node => {
-          input = node
-        }} type="text"/>
-          <button type="submit">
-            Search stock
-          </button>
-        </form>
-    );
+        <TextField value={this.state.value} onChange={this.handleChange} style={style}  />
+        <RaisedButton label="Search stock" secondary={true} style={style} type="submit" />
+      </form>
+    )
+  }
+}
 
 SearchStock = connect()(SearchStock);
 

@@ -3,24 +3,14 @@
  */
 import React, { Component, PropTypes } from 'react';
 
-import { connect } from 'react-redux';
+const LatestError = ({ error }) => (
+  <div>
+    {error}
+  </div>
+)
 
-
-class LatestError extends Component {
-  render() {
-    return (
-      <div>
-
-      </div>
-    )
-  }
+LatestError.propTypes = {
+  error: PropTypes.string.isRequired
 }
 
-function mapStateToProps(state) {
-  return {
-    message: PropTypes.string.isRequired
-  }
-}
-
-
-export default connect(mapStateToProps)(LatestError)
+export default LatestError

@@ -11,6 +11,10 @@ import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
 
+const style = {fontFamily: 'Times New Roman',
+  fontSize: "24px",
+  color: "rgba(0, 0, 0, 0.4)"};
+
 class StockInfo extends Component {
 
   static propTypes = {
@@ -21,6 +25,7 @@ class StockInfo extends Component {
     if(this.props.stocks.length > 0){
       return (
       <div>
+        <span style={style}>Trading information</span>
         <Table>
           <TableHeader>
             <TableRow>
@@ -44,13 +49,16 @@ class StockInfo extends Component {
              </TableRow>
           </TableBody>
         </Table>
-        <LatestError error={error} />
+        <LatestError error={this.props.error} />
       </div>
       )
     }
     else{
       return (
-        <LatestError error={error} />
+        <div>
+          <span style={style}>Trading information</span>
+          <LatestError error={this.props.error} />
+        </div>
       )
     }
   }
@@ -72,7 +80,8 @@ function mapStateToProps(state) {
   }
   else{
     return {
-      stocks : []
+      stocks : [],
+      error: state.ErrorReducers.message
     }
   }
 }

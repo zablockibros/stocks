@@ -10,7 +10,7 @@ const Header = () => (
           <ToolbarGroup float="left">
             <ToolbarTitle text="Your Stock Portfolio"/>
           </ToolbarGroup>
-          <ToolbarGroup float="right">
+          <ToolbarGroup float="right" style={{width: "650px"}}>
             <ToolbarTitle text="Search by symbol:"/>
             <SearchStock />
           </ToolbarGroup>

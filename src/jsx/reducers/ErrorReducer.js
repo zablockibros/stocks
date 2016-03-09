@@ -1,4 +1,4 @@
-const ErrorReducers = (state = { message : null }, action) => {
+const ErrorReducers = (state = { message : "" }, action) => {
   switch (action.type) {
     case 'BUY_STOCK_FAIL':
       return {
@@ -18,15 +18,15 @@ const ErrorReducers = (state = { message : null }, action) => {
       }
     case 'INIT_STOCK':
         return {
-          message : null
+          message : ""
         }
     case 'BUY_STOCK':
       return {
-        message : null
+        message : ""
       }
     case 'SELL_STOCK':
       return {
-        message : null
+        message : ""
       }
     default:
       return state

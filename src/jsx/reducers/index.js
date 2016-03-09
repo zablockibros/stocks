@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 import SearchReducer from './SearchReducer'
 import TradeReducers from './TradeReducer'
-import ErrorReducer from './ErrorReducer'
+import ErrorReducers from './ErrorReducer'
 
 const rootReducer = combineReducers({
   SearchReducer,
   TradeReducers,
-  ErrorReducer
+  ErrorReducers
 })
 
 export default rootReducer
