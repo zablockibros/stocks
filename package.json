@@ -1,7 +1,10 @@
 {
   "name": "stock-portfolio",
   "version": "1.0.0",
-  "description": "",
+  "engines": {
+    "node": "4.1.1"
+  },
+  "description": "This is an app",
   "main": "index.js",
   "author": "Trevor J Zablocki",
   "license": "ISC",
