@@ -4,13 +4,13 @@ import TradeList from '../components/TradeList'
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.TradeReducer.stocks.filter(t => { if(t.amt > 0) return true; else return false; })
+    stocks: state.TradeReducers.stocks.filter(t => { if(t.amt > 0) return true; else return false; })
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoClick: (symbol) => {
+    onSelectStock: (symbol) => {
       dispatch(getStock(symbol))
     }
   }
@@ -20,3 +20,5 @@ const ActiveTradeList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TradeList)
+
+export default ActiveTradeList

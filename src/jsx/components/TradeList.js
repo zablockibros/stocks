@@ -32,7 +32,7 @@ const TradeList = ({ stocks, onSelectStock }) => (
 )
 
 TradeList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
+  stocks: PropTypes.arrayOf(PropTypes.shape({
     symbol: PropTypes.string.isRequired,
     amt: PropTypes.number.isRequired,
     bid: PropTypes.number.isRequired,

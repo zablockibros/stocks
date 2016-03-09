@@ -20,41 +20,45 @@ class StockInfo extends Component {
   render() {
     if(this.props.stocks.length > 0){
       return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>Symbol</TableHeaderColumn>
-            <TableHeaderColumn>Ask</TableHeaderColumn>
-            <TableHeaderColumn>Bid</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {this.props.stocks.map(stock =>
+      <div>
+        <Table>
+          <TableHeader>
             <TableRow>
-              <TableRowColumn>stock.symbol</TableRowColumn>
-              <TableRowColumn>stock.ask</TableRowColumn>
-              <TableRowColumn>stock.bid</TableRowColumn>
+              <TableHeaderColumn>Symbol</TableHeaderColumn>
+              <TableHeaderColumn>Ask</TableHeaderColumn>
+              <TableHeaderColumn>Bid</TableHeaderColumn>
             </TableRow>
-          )}
-          <TableRow>
-           <TableRowColumn></TableRowColumn>
-           <TableRowColumn><BuyStock /></TableRowColumn>
-           <TableRowColumn><SellStock /></TableRowColumn>
-           </TableRow>
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {this.props.stocks.map(stock =>
+              <TableRow>
+                <TableRowColumn>stock.symbol</TableRowColumn>
+                <TableRowColumn>stock.ask</TableRowColumn>
+                <TableRowColumn>stock.bid</TableRowColumn>
+              </TableRow>
+            )}
+            <TableRow>
+             <TableRowColumn></TableRowColumn>
+             <TableRowColumn><BuyStock /></TableRowColumn>
+             <TableRowColumn><SellStock /></TableRowColumn>
+             </TableRow>
+          </TableBody>
+        </Table>
+        <LatestError error={error} />
+      </div>
       )
     }
     else{
       return (
-        <LatestError />
+        <LatestError error={error} />
       )
     }
   }
 }
 
 StockInfo.propTypes = {
-  stocks: PropTypes.array.isRequired
+  stocks: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired
 }
 
 function mapStateToProps(state) {
@@ -62,7 +66,8 @@ function mapStateToProps(state) {
     return {
       stocks: [state.TradeReducers.stocks.sort(function (a, b) {
         if (a.active) return 1; else if (b.active) return -1;
-      })[0]]
+      })[0]],
+      error: state.ErrorReducers.message
     }
   }
   else{

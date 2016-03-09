@@ -1,6 +1,6 @@
 import React from 'react'
 import StockInfo from '../containers/StockInfo'
-import TradeList from '../containers/ActiveTradeList'
+import ActiveTradeList from '../containers/ActiveTradeList'
 
 const Boxes = () => (
   <div style={{width: '100%'}}>
